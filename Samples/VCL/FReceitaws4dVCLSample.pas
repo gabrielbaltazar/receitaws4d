@@ -33,62 +33,62 @@ uses
 
 procedure TForm1.btnSearchClick(Sender: TObject);
 var
-  LPessoa: IReceitaws4dModelPessoa;
+  LPerson: IReceitaws4dModelPessoa;
   LIndex: Integer;
 begin
-  LPessoa := GetReceitaws4d
+  LPerson := GetReceitaws4d
               .CNPJ(edtCNPJ.Text)
               .Search;
 
   mmoData.Lines.Clear;
 
-  WriteData('Nome: %s', [LPessoa.Nome]);
-  WriteData('Nome Fantasia: %s', [LPessoa.NomeFantasia]);
-  WriteData('CNPJ: %s', [LPessoa.CNPJ]);
-  WriteData('Ultima Atualizacao: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPessoa.UltimaAtualizacao)]);
-  WriteData('Tipo: %s', [LPessoa.Tipo]);
-  WriteData('Porte: %s', [LPessoa.Porte]);
-  WriteData('Data Abertura: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPessoa.DataAbertura)]);
-  WriteData('Natureza Juridica: %s', [LPessoa.NaturezaJuridica]);
-  WriteData('Logradouro: %s', [LPessoa.Logradouro]);
-  WriteData('Numero: %s', [LPessoa.Numero]);
-  WriteData('Complemento: %s', [LPessoa.Complemento]);
-  WriteData('Cep: %s', [LPessoa.Cep]);
-  WriteData('Bairro: %s', [LPessoa.Bairro]);
-  WriteData('Municipio: %s', [LPessoa.Municipio]);
-  WriteData('UF: %s', [LPessoa.UF]);
-  WriteData('Email: %s', [LPessoa.Email]);
-  WriteData('Telefone: %s', [LPessoa.Telefone]);
-  WriteData('Efr: %s', [LPessoa.Efr]);
-  WriteData('Situacao: %s', [LPessoa.Situacao]);
-  WriteData('Data Situacao: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPessoa.DataSituacao)]);
-  WriteData('Motivo Situacao: %s', [LPessoa.MotivoSituacao]);
-  WriteData('Situacao Especial: %s', [LPessoa.SituacaoEspecial]);
-  WriteData('Capital Social: %s', [CurrToStr(LPessoa.CapitalSocial)]);
-  WriteData('Data Situacao Especial: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPessoa.DataSituacaoEspecial)]);
+  WriteData('Nome: %s', [LPerson.Nome]);
+  WriteData('Nome Fantasia: %s', [LPerson.NomeFantasia]);
+  WriteData('CNPJ: %s', [LPerson.CNPJ]);
+  WriteData('Ultima Atualizacao: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPerson.UltimaAtualizacao)]);
+  WriteData('Tipo: %s', [LPerson.Tipo]);
+  WriteData('Porte: %s', [LPerson.Porte]);
+  WriteData('Data Abertura: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPerson.DataAbertura)]);
+  WriteData('Natureza Juridica: %s', [LPerson.NaturezaJuridica]);
+  WriteData('Logradouro: %s', [LPerson.Logradouro]);
+  WriteData('Numero: %s', [LPerson.Numero]);
+  WriteData('Complemento: %s', [LPerson.Complemento]);
+  WriteData('Cep: %s', [LPerson.Cep]);
+  WriteData('Bairro: %s', [LPerson.Bairro]);
+  WriteData('Municipio: %s', [LPerson.Municipio]);
+  WriteData('UF: %s', [LPerson.UF]);
+  WriteData('Email: %s', [LPerson.Email]);
+  WriteData('Telefone: %s', [LPerson.Telefone]);
+  WriteData('Efr: %s', [LPerson.Efr]);
+  WriteData('Situacao: %s', [LPerson.Situacao]);
+  WriteData('Data Situacao: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPerson.DataSituacao)]);
+  WriteData('Motivo Situacao: %s', [LPerson.MotivoSituacao]);
+  WriteData('Situacao Especial: %s', [LPerson.SituacaoEspecial]);
+  WriteData('Capital Social: %s', [CurrToStr(LPerson.CapitalSocial)]);
+  WriteData('Data Situacao Especial: %s', [FormatDateTime('dd/MM/yyyy hh:mm:ss', LPerson.DataSituacaoEspecial)]);
 
-  WriteData('Codigo Atividade Principal: %s', [LPessoa.AtividadePrincipal.Codigo]);
-  WriteData('Atividade Principal: %s', [LPessoa.AtividadePrincipal.Descricao]);
+  WriteData('Codigo Atividade Principal: %s', [LPerson.AtividadePrincipal.Codigo]);
+  WriteData('Atividade Principal: %s', [LPerson.AtividadePrincipal.Descricao]);
 
   WriteData('', []);
-  while LPessoa.AtividadesSecundarias.HasNext do
+  while LPerson.AtividadesSecundarias.HasNext do
   begin
     WriteData('', []);
-    LIndex := LPessoa.AtividadesSecundarias.Index + 1;
-    WriteData('Codigo Atividade %d: %s', [LIndex, LPessoa.AtividadesSecundarias.Current.Codigo]);
-    WriteData('Atividade %d: %s', [LIndex, LPessoa.AtividadesSecundarias.Current.Descricao]);
+    LIndex := LPerson.AtividadesSecundarias.Index + 1;
+    WriteData('Codigo Atividade %d: %s', [LIndex, LPerson.AtividadesSecundarias.Current.Codigo]);
+    WriteData('Atividade %d: %s', [LIndex, LPerson.AtividadesSecundarias.Current.Descricao]);
   end;
 
   WriteData('', []);
-  while LPessoa.Socios.HasNext do
+  while LPerson.Socios.HasNext do
   begin
     WriteData('', []);
-    LIndex := LPessoa.Socios.Index + 1;
-    WriteData('Nome Sócio %d: %s', [LIndex, LPessoa.Socios.Current.Nome]);
-    WriteData('Qualificação Sócio %d: %s', [LIndex, LPessoa.Socios.Current.Qualificacao]);
-    WriteData('País Sócio %d: %s', [LIndex, LPessoa.Socios.Current.PaisOrigem]);
-    WriteData('Nome Representante Sócio %d: %s', [LIndex, LPessoa.Socios.Current.NomeRepresentanteLegal]);
-    WriteData('Qualificacao Representante Sócio %d: %s', [LIndex, LPessoa.Socios.Current.QualificacaoRepresentanteLegal]);
+    LIndex := LPerson.Socios.Index + 1;
+    WriteData('Nome Sócio %d: %s', [LIndex, LPerson.Socios.Current.Nome]);
+    WriteData('Qualificação Sócio %d: %s', [LIndex, LPerson.Socios.Current.Qualificacao]);
+    WriteData('País Sócio %d: %s', [LIndex, LPerson.Socios.Current.PaisOrigem]);
+    WriteData('Nome Representante Sócio %d: %s', [LIndex, LPerson.Socios.Current.NomeRepresentanteLegal]);
+    WriteData('Qualificacao Representante Sócio %d: %s', [LIndex, LPerson.Socios.Current.QualificacaoRepresentanteLegal]);
   end;
 end;
 

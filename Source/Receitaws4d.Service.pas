@@ -23,7 +23,7 @@ type TReceitaws4dService = class(TInterfacedObject, IReceitaws4dService)
     FPessoa: IReceitaws4dModelPessoa;
     FComponent: IReceitaws4dComponentRequest;
 
-    function FormatCNPJ: string;
+    function FormatCNPJ(ACNPJ: String): string;
 
     procedure ReadFromJSON(AJSON: TJSONObject; AEmpresa: IReceitaws4dModelPessoa);
     procedure ReadAtividadesSecundarias(AJSON: TJSONObject; AEmpresa: IReceitaws4dModelPessoa);
@@ -64,15 +64,15 @@ begin
   result := FPessoa;
 end;
 
-function TReceitaws4dService.FormatCNPJ: string;
+function TReceitaws4dService.FormatCNPJ(ACNPJ: String): string;
 var
   I: Integer;
 begin
   result := EmptyStr;
-  for I := 1 to FCNPJ.Length do
+  for I := 1 to ACNPJ.Length do
   begin
-    if CharInSet(FCNPJ[i], ['0'..'9']) then
-      result := result + FCNPJ[i];
+    if CharInSet(ACNPJ[i], ['0'..'9']) then
+      result := result + ACNPJ[i];
   end;
 end;
 
@@ -120,7 +120,7 @@ begin
     Exit;
 
   AEmpresa
-    .CNPJ(FCNPJ)
+    .CNPJ(FormatCNPJ(FCNPJ))
     .Nome(AJSON.ValueAsString('nome'))
     .NomeFantasia(AJSON.ValueAsString('fantasia'))
     .UltimaAtualizacao(AJSON.ValueAsIso8601('ultima_atualizacao'))
@@ -198,7 +198,7 @@ var
   LJSON: TJSONObject;
 begin
   FPessoa := TReceitaws4dModelPessoa.New;
-  LUrl := Format('https://www.receitaws.com.br/v1/cnpj/%s', [FormatCNPJ]);
+  LUrl := Format('https://www.receitaws.com.br/v1/cnpj/%s', [FormatCNPJ(FCNPJ)]);
   FComponent
     .BaseUrl(LUrl)
     .Send;
