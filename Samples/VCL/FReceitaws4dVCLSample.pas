@@ -1,8 +1,33 @@
-# Receitaws4d
-Search for an company by a specific document
+unit FReceitaws4dVCLSample;
 
-## Search Company
-```delphi
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    pnlTop: TPanel;
+    edtCNPJ: TEdit;
+    Label1: TLabel;
+    btnSearch: TButton;
+    mmoData: TMemo;
+    procedure btnSearchClick(Sender: TObject);
+  private
+    procedure WriteData(AText: String; const AArgs: array of const);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
 uses
   Receitaws4d;
 
@@ -59,11 +84,20 @@ begin
   begin
     WriteData('', []);
     LIndex := LPerson.Socios.Index + 1;
-    WriteData('Nome S贸cio %d: %s', [LIndex, LPerson.Socios.Current.Nome]);
-    WriteData('Qualifica莽茫o S贸cio %d: %s', [LIndex, LPerson.Socios.Current.Qualificacao]);
-    WriteData('Pa铆s S贸cio %d: %s', [LIndex, LPerson.Socios.Current.PaisOrigem]);
-    WriteData('Nome Representante S贸cio %d: %s', [LIndex, LPerson.Socios.Current.NomeRepresentanteLegal]);
-    WriteData('Qualificacao Representante S贸cio %d: %s', [LIndex, LPerson.Socios.Current.QualificacaoRepresentanteLegal]);
+    WriteData('Nome S骳io %d: %s', [LIndex, LPerson.Socios.Current.Nome]);
+    WriteData('Qualifica玢o S骳io %d: %s', [LIndex, LPerson.Socios.Current.Qualificacao]);
+    WriteData('Pa韘 S骳io %d: %s', [LIndex, LPerson.Socios.Current.PaisOrigem]);
+    WriteData('Nome Representante S骳io %d: %s', [LIndex, LPerson.Socios.Current.NomeRepresentanteLegal]);
+    WriteData('Qualificacao Representante S骳io %d: %s', [LIndex, LPerson.Socios.Current.QualificacaoRepresentanteLegal]);
   end;
 end;
-```
+
+procedure TForm1.WriteData(AText: String; const AArgs: array of const);
+begin
+  mmoData.Lines.Add(Format(AText, AArgs));
+end;
+
+initialization
+  ReportMemoryLeaksOnShutdown := True;
+
+end.
